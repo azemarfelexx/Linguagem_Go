@@ -11,9 +11,9 @@ func pong(c chan string) {
 	}
 }
 
-func ping(c chan string) { // chan é a palavra reservada para canal
+func ping(c chan string) {
 	for i := 0; ; i++ {
-		c <- "ping" // Usado para enviar e receber mensagens pelo canal
+		c <- "ping"
 	}
 }
 
