@@ -9,27 +9,27 @@ import (
 )
 
 type biblioteca struct {
-	biblioteca []livros `json: "livros"`
+	Livros []livros `json:"livros"`
 }
 
 type livros struct {
-	Titulo        string     `json: "Titulo"`
-	Autor         string     `json: "Autor"`
-	Paginas       int        `json: "Paginas"`
-	Editora       string     `json: "Editora"`
-	Nacionalidade string     `json: "Nacionalidade"`
-	Disponivel    Disponivel `json: "Disponivel"`
-	Formato       Formato    `json: "Formato"`
+	Titulo        string     `json:"Titulo"`
+	Autor         string     `json:"Autor"`
+	Paginas       int        `json:"Paginas"`
+	Editora       string     `json:"Editora"`
+	Nacionalidade string     `json:"Nacionalidade"`
+	Disponivel    Disponivel `json:"Disponivel"`
+	Formato       Formato    `json:"Formato"`
 }
 
 type Disponivel struct {
-	Skoob  string `json: "Skoob"`
-	Amazon string `json: "Amazon"`
+	Skoob  string `json:"Skoob"`
+	Amazon string `json:"Amazon"`
 }
 
 type Formato struct {
-	Digital string `json: "Digital"`
-	Fisico  string `json: "Fisico"`
+	Digital string `json:"Digital"`
+	Fisico  string `json:"Fisico"`
 }
 
 func main() {
@@ -48,8 +48,14 @@ func main() {
 
 	json.Unmarshal(byteValue, &livros)
 
-	for i := 0; i < len(livros.biblioteca); i++ {
-		fmt.Println("livros Titulo: " + livros.biblioteca[i].Titulo)
-		fmt.Println("livros Paginas: " + strconv.Itoa(livros.biblioteca[i].Paginas))
+	err = json.Unmarshal(byteValue, &livros)
+	if err != nil {
+		fmt.Println("Erro ao decodificar JSON:", err)
+		return
+	}
+
+	for i := 0; i < len(livros.Livros); i++ {
+		fmt.Println("livros Titulo: " + livros.Livros[i].Titulo)
+		fmt.Println("livros Paginas: " + strconv.Itoa(livros.Livros[i].Paginas))
 	}
 }
